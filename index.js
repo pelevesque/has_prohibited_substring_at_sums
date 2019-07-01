@@ -20,16 +20,23 @@ module.exports = (str, prohibitedSubstrings,
       sumPlainDigits: sumPlainDigits
     })
     if (prohibitedSubstrings.hasOwnProperty(sum)) {
-      let substring = prohibitedSubstrings[sum]
-      if (allowSubstringBleeding) {
-        const substringMaxLength = str.length - i - 1
-        if (substring.length > substringMaxLength) {
-          substring = substring.substr(0, substringMaxLength)
+      let substrings = prohibitedSubstrings[sum]
+      if (!Array.isArray(substrings)) substrings = [substrings]
+      for (let j = 0, len = substrings.length; j < len; j++) {
+        let substring = substrings[j]
+        if (allowSubstringBleeding) {
+          const substringMaxLength = str.length - i - 1
+          if (substring.length > substringMaxLength) {
+            substring = substring.substr(0, substringMaxLength)
+          }
+        }
+        const target = str.substr(i + 1, substring.length)
+        if (substring.localeCompare(target) === 0) {
+          hasProhibitedSubstring = true
+          break
         }
       }
-      const target = str.substr(i + 1, substring.length)
-      if (substring.localeCompare(target) === 0) {
-        hasProhibitedSubstring = true
+      if (hasProhibitedSubstring) {
         break
       } else {
         delete prohibitedSubstrings[sum]

@@ -494,4 +494,22 @@ describe('#hasProhibitedSubstringAtSums()', () => {
       })
     })
   })
+
+  describe('many substrings per sum', () => {
+    it('should return false when all of many substrings are not found', () => {
+      const str = '1abc2bcd3cde45'
+      const prohibitedSubstrings = { 1: ['bee', 'pig', 'man'], 6: ['hog', 'fly'] }
+      const result = hasProhibitedSubstringAtSums(str, prohibitedSubstrings)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true when at least one of many substrings is found', () => {
+      const str = '1abc2bcd3cde45'
+      const prohibitedSubstrings = { 1: ['bee', 'pig', 'man'], 6: ['hog', 'cde', 'fly'] }
+      const result = hasProhibitedSubstringAtSums(str, prohibitedSubstrings)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+  })
 })
