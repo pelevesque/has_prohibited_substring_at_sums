@@ -6,6 +6,12 @@
 
 Checks if a string has a prohibited substring after given sums.
 
+## Related Packages
+
+https://github.com/pelevesque/has_prohibited_substring_at_indexes  
+https://github.com/pelevesque/has_required_substrings_at_sums  
+https://github.com/pelevesque/has_required_substrings_at_indexes  
+
 ## Node Repository
 
 https://www.npmjs.com/package/@pelevesque/has_prohibited_substring_at_sums
@@ -115,7 +121,7 @@ const result = hasProhibitedSubstringAtSums(str, prohibitedSubstrings, {
 
 The `allowSubstringBleeding` flag is `false` by default. It it used when you want
 to allow the last substring to be incomplete if the string is too short.
-In the following example, the last substring `canal` starts after the right sum,
+In the following example, the last substring `canal` starts at the correct index,
 but remains incomplete since the string ends. Normally this would return `false`.
 With `allowSubstringBleeding` set to `true`, it returns `true`.
 
