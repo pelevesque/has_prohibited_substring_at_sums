@@ -16,8 +16,9 @@
   },
   "keywords": [
     "prohibited",
-    "substring",
+    "str",
     "string",
+    "substring",
     "sum"
   ],
   "author": "Pierre-Emmanuel Lévesque <pierre.e.levesque@gmail.com>",
