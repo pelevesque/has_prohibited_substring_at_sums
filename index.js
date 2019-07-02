@@ -2,8 +2,7 @@
 
 const sumDigits = require('@pelevesque/sum-digits')
 
-const isObjectEmpty = (obj) =>
-  Object.entries(obj).length === 0 && obj.constructor === Object
+const isObjectEmpty = (obj) => Object.entries(obj).length === 0
 
 module.exports = (str, prohibitedSubstrings,
   {
@@ -13,14 +12,15 @@ module.exports = (str, prohibitedSubstrings,
   } = {}
 ) => {
   if (isObjectEmpty(prohibitedSubstrings) || str === '') return false
+  const prohibitedSubstringsClone = Object.assign({}, prohibitedSubstrings)
   let hasProhibitedSubstring = false
   for (let i = 0, len = str.length; i < len; i++) {
     const sum = sumDigits(str.substr(0, i + 1), {
       substringsToDigits: substringsToDigits,
       sumPlainDigits: sumPlainDigits
     })
-    if (prohibitedSubstrings.hasOwnProperty(sum)) {
-      let substrings = prohibitedSubstrings[sum]
+    if (prohibitedSubstringsClone.hasOwnProperty(sum)) {
+      let substrings = prohibitedSubstringsClone[sum]
       if (!Array.isArray(substrings)) substrings = [substrings]
       for (let j = 0, len = substrings.length; j < len; j++) {
         let substring = substrings[j]
@@ -39,7 +39,7 @@ module.exports = (str, prohibitedSubstrings,
       if (hasProhibitedSubstring) {
         break
       } else {
-        delete prohibitedSubstrings[sum]
+        delete prohibitedSubstringsClone[sum]
       }
     }
   }
